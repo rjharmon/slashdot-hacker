@@ -1,0 +1,52 @@
+
+Slashdot-hacker is a simple rails app - probably overkill, I know - which
+processes the RSS slashdot feed and makes it available on localhost in a
+different format.  Patches welcome to make this lighter, maybe by listening
+directly for requests and bypassing Rails.
+
+app/controllers/slash_controller.rb provides an example of how I am
+processing the feed.  These changes enable me to view the feed in
+Thunderbird's RSS reader, without being forced to see the full original web
+page and comments which are too distracting.  I'd like it if it retained the
+original article timestamp, but oh well.  Patches welcome.
+
+I wanted this a long time ago, but it actually happened because Slashdot
+stopped including a URL that Thunderbird could fetch the way I wanted. 
+Having to click through on every article, based on headlines too often
+written in a hyped-up way, was the straw that broke the camel's back.  I
+understand they probably did it to get people the full javascript
+experience, but that's not what I want.  I just wanted to read the content
+that is shipped with the RSS feed to begin with.  I have a mouse button if I
+want to click through for more (such as to read TFA).  So there.
+
+This is easily adapted for reprocessing any web site's feed.  Even multiple
+websites feeds - just create new controller actions for them.
+
+To use:
+
+* Clone from GitHub (see their docs, please)
+* Ensure that Rails is installed and working
+* change into the application's root directory
+* Choose your method of running the app (e.g., Passenger/Apache/Nginx/etc)
+  * or *
+* Start the rails app with script/server -d --port=2999
+  * Pick your port number and remember it.
+  * You might choose to run this as a cron job - it won't ever start
+  multiple instances except maybe on Windows.
+
+Access the altered slashdot feed on:
+
+http://localhost:2999/slash/read
+
+(use the correct port number)
+
+You might also want to add an option to script/server so that it only
+listens on 127.0.0.1, if your machine is accessible from anywhere else. 
+
+
+This application is published for educational and personal use only.  No
+rights reserved.  No implied warranty.  Your use of this code is solely your
+responsibility.
+
+
+  
